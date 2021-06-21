@@ -19,9 +19,8 @@ var (
 	}, []string{"code", "path"})
 )
 
+
 func Registry()  {
-	r := prometheus.NewRegistry()
-	r.MustRegister(HttpRequestDuration)
-	r.MustRegister(HttpRequestsErrorTotal)
-	r.MustRegister(HttpRequestsTotal)
+	prometheus.MustRegister(HttpRequestDuration, HttpRequestsErrorTotal, HttpRequestsTotal)
+
 }

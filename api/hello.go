@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"monitoring-entry-task/common"
 	"net/http"
 )
@@ -20,4 +21,12 @@ func Hello(ctx *gin.Context) {
 		"status":  http.StatusOK,
 		"message": "Hello! " + name,
 	})
+}
+
+func PrometheusHandler() gin.HandlerFunc {
+	h := promhttp.Handler()
+
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
 }
